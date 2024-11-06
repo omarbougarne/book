@@ -3,6 +3,8 @@ import { BookService } from './book.service';
 import { Book } from './schemas/book.schema';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import { Roles } from 'src/auth/roles.decorator';
+import { Role } from 'src/auth/schemas/user.schema';
 
 @Controller('books')
 export class BookController {
@@ -44,6 +46,7 @@ export class BookController {
     }
 
     @Delete(':id')
+    @Roles(Role.Admin)
     async deleteBook(
         @Param('id')
         id:string,
